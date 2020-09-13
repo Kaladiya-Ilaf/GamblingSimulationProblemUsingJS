@@ -8,11 +8,16 @@ var currentStake = STAKE;
 
 playGame = () => Math.floor(Math.random() * 10) % 2;
 
+calculateFiftyPercentOfStake = () => Math.floor(50 * STAKE / 100);
+
+//Initializing max and min limit for the day 
+var maxLimit = STAKE + calculateFiftyPercentOfStake();
+var minLimit = STAKE - calculateFiftyPercentOfStake();
 
 function calculateCurrentStake(playGame) {
-    currentStake = (playGame() == WIN) ? currentStake += BET : currentStake -= BET;
-    (currentStake > 100) ? console.log("Player Won"): console.log("Player Lost");
-    return currentStake;
+    return (playGame() == WIN) ? currentStake += BET : currentStake -= BET;
 }
 
-console.log("Current Stake : " + calculateCurrentStake(playGame))
+while (currentStake < maxLimit && currentStake > minLimit) {
+    console.log("Current Stake : " + calculateCurrentStake(playGame))
+}
