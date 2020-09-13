@@ -23,4 +23,4 @@ while (true) {
         break
     currentStake = calculateCurrentStake(playGame);
 }
-(currentStake == maxStakeLimit) ? console.log("Player won for the day. \nCurrent Stake : " + currentStake): console.log("Player lost for the day. \nCurrent Stake : " + currentStake);
+(currentStake == maxStakeLimit) ? console.log(`Player won for the day. \nCurrent Stake : ${currentStake}`): console.log(`Player lost for the day. \nCurrent Stake : ${currentStake}`);
