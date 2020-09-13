@@ -6,18 +6,12 @@ const WIN = 1;
 //Initialize stake for the day
 var currentStake = STAKE;
 
-function playGame() {
-    return Math.floor(Math.random() * 10) % 2
-}
+playGame = () => Math.floor(Math.random() * 10) % 2;
+
 
 function calculateCurrentStake(playGame) {
-    if (playGame() == WIN) {
-        currentStake += BET;
-        console.log("Player Won!");
-    } else {
-        currentStake -= BET;
-        console.log("Player Lost!");
-    }
+    currentStake = (playGame() == WIN) ? currentStake += BET : currentStake -= BET;
+    (currentStake > 100) ? console.log("Player Won"): console.log("Player Lost");
     return currentStake;
 }
 
