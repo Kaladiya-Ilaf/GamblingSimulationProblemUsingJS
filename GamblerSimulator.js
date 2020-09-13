@@ -6,19 +6,21 @@ const WIN = 1;
 //Initialize stake for the day
 var currentStake = STAKE;
 
-function playGame() {
-    return Math.floor(Math.random() * 10) % 2
-}
+calculateFiftyPercentOfStake = () => Math.floor(50 * STAKE / 100);
 
-function calculateCurrentStake(playGame) {
-    if (playGame() == WIN) {
-        currentStake += BET;
-        console.log("Player Won!");
-    } else {
-        currentStake -= BET;
-        console.log("Player Lost!");
-    }
-    return currentStake;
-}
+//Initializing max and min limit for the day 
+var maxStakeLimit = STAKE + calculateFiftyPercentOfStake();
+var minStakeLimit = STAKE - calculateFiftyPercentOfStake();
 
-console.log("Current Stake : " + calculateCurrentStake(playGame))
+playGame = () => Math.floor(Math.random() * 10) % 2;
+
+calculateCurrentStake = (playGame) => (playGame() == WIN) ? currentStake += BET : currentStake -= BET;
+
+while (true) {
+    if (currentStake <= minStakeLimit)
+        break
+    if (currentStake >= maxStakeLimit)
+        break;
+    calculateCurrentStake(playGame);
+}
+(currentStake == maxStakeLimit) ? console.log(`Player won for the day. \nCurrent Stake : ${currentStake}`): console.log(`Player lost for the day. \nCurrent Stake : ${currentStake}`);
