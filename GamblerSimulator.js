@@ -18,6 +18,10 @@ function calculateCurrentStake(playGame) {
     return (playGame() == WIN) ? currentStake += BET : currentStake -= BET;
 }
 
-while (currentStake < maxLimit && currentStake > minLimit) {
-    console.log("Current Stake : " + calculateCurrentStake(playGame))
+while (true) {
+    if (currentStake <= minLimit)
+        break
+    if (currentStake >= maxLimit)
+        break
+    console.log(calculateCurrentStake(playGame))
 }
