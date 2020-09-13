@@ -20,7 +20,7 @@ while (true) {
     if (currentStake <= minStakeLimit)
         break
     if (currentStake >= maxStakeLimit)
-        break
-    currentStake = calculateCurrentStake(playGame);
+        break;
+    calculateCurrentStake(playGame);
 }
 (currentStake == maxStakeLimit) ? console.log(`Player won for the day. \nCurrent Stake : ${currentStake}`): console.log(`Player lost for the day. \nCurrent Stake : ${currentStake}`);
