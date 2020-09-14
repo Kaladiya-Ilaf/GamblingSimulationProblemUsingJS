@@ -7,7 +7,10 @@ const NUM_OF_DAYS = 20;
 var days = 1,
     currentBalance = 0,
     totalAmount = NUM_OF_DAYS * STAKE,
-    currentStake;
+    currentStake,
+    betsLost,
+    betsWon,
+    totalBets;
 
 calculateFiftyPercentOfStake = () => Math.floor(50 * STAKE / 100);
 
@@ -17,23 +20,37 @@ var minStakeLimit = STAKE - calculateFiftyPercentOfStake();
 
 playGame = () => Math.floor(Math.random() * 10) % 2;
 
-calculateCurrentStake = (playGame) => (playGame() == WIN) ? currentStake += BET : currentStake -= BET;
-
 while (days <= NUM_OF_DAYS) {
     //Initialize stake for the day
     currentStake = STAKE;
-
+    betsWon = 0;
+    betsLost = 0;
     while (true) {
         if (currentStake <= minStakeLimit)
             break
         if (currentStake >= maxStakeLimit)
             break;
-        calculateCurrentStake(playGame);
+        if (playGame() == WIN) {
+            currentStake += BET
+            betsWon += 1;
+        } else {
+            currentStake -= BET;
+            betsLost += 1
+        }
+    }
+    totalBets = betsWon + betsLost;
+    console.log("No. of bets played: " + totalBets)
+
+    if (currentStake == maxStakeLimit) {
+        console.log(`Player won for the day ${days}. 
+Current Stake : ${currentStake}.
+Bets Won : ${betsWon}.`);
+    } else {
+        console.log(`Player lost for the day ${days}.
+Current Stake : ${currentStake}.
+Bets Lost : ${betsLost}.`);
     }
 
-    (currentStake == maxStakeLimit) ? console.log(`Player won for the day ${days}. 
-Current Stake : ${currentStake}`): console.log(`Player lost for the day ${days}.
-Current Stake : ${currentStake}`);
     currentBalance += currentStake;
     days++;
 }
